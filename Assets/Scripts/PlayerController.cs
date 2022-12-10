@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Vector3 moveDelta;
     private RaycastHit2D hit;
+    [SerializeField] private int movementSpeed;
 
     private void Start()
     {
@@ -32,14 +33,14 @@ public class PlayerController : MonoBehaviour
             Math.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
         if (hit.collider == null)
         {
-            transform.Translate(0, moveDelta.y * Time.deltaTime, 0);
+            transform.Translate(0, moveDelta.y * Time.deltaTime * movementSpeed, 0);
         }
         
         hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x, 0),
             Math.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
         if (hit.collider == null)
         {
-            transform.Translate(moveDelta.x * Time.deltaTime, 0, 0);
+            transform.Translate(moveDelta.x * Time.deltaTime * movementSpeed, 0, 0);
         }
     }
 }

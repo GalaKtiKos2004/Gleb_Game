@@ -155,18 +155,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorTilemap: {fileID: 697511704}
   wallTilemap: {fileID: 1032339194}
-  floorTile: {fileID: 11400000, guid: a063e968fd6d45d4885c407e1d84352f, type: 2}
-  wallTop: {fileID: 11400000, guid: 22c9f328675568942a63b2770a6a63dc, type: 2}
-  wallSideRight: {fileID: 11400000, guid: 56a025a4f1e8ec14ebfa0c2300d95b8e, type: 2}
-  wallSiderLeft: {fileID: 11400000, guid: 0f895bfef3ebb4f4aacf3fac66196c1c, type: 2}
-  wallBottom: {fileID: 11400000, guid: 17de16fed6ed8cc4fa8aed5e072ee432, type: 2}
-  wallFull: {fileID: 11400000, guid: 9bd9b91a7e97483419306d5b0c9c37ec, type: 2}
-  wallInnerCornerDownLeft: {fileID: 11400000, guid: a4a8fd2caea494c45916e75fc21be5c2, type: 2}
-  wallInnerCornerDownRight: {fileID: 11400000, guid: 32fb4d0075b44bf43b045b03663afc2c, type: 2}
-  wallDiagonalCornerDownRight: {fileID: 11400000, guid: ece443381d8fc294f928c22650a87c24, type: 2}
-  wallDiagonalCornerDownLeft: {fileID: 11400000, guid: f0876383a0a9e9f4a8f543d8515e12c0, type: 2}
-  wallDiagonalCornerUpRight: {fileID: 11400000, guid: 809171e13e7908f40a916074c244f08c, type: 2}
-  wallDiagonalCornerUpLeft: {fileID: 11400000, guid: 990709a76d4f9124db8ca4026e79a932, type: 2}
+  floorTile: {fileID: 11400000, guid: 3b763e36724083f469518fcdbe95320f, type: 2}
+  wallTop: {fileID: 11400000, guid: c4b8419097d98234281586197586a9e7, type: 2}
+  wallSideRight: {fileID: 11400000, guid: b50cae579121e1549b04bd0c2fb1a442, type: 2}
+  wallSiderLeft: {fileID: 11400000, guid: e112736955350364c834092834bfd9bc, type: 2}
+  wallBottom: {fileID: 11400000, guid: cd20fe4afc7efd743a1b11854c926680, type: 2}
+  wallFull: {fileID: 11400000, guid: 911970fe61518af4da32067d210f3af0, type: 2}
+  wallInnerCornerDownLeft: {fileID: 11400000, guid: bcfe1985448f12a4ba14597a5d5f2bf8, type: 2}
+  wallInnerCornerDownRight: {fileID: 11400000, guid: 1438bc1ca6114604490fb79e230b7d02, type: 2}
+  wallDiagonalCornerDownRight: {fileID: 11400000, guid: 1c62e2fdafd493d458a841177999d8d4, type: 2}
+  wallDiagonalCornerDownLeft: {fileID: 11400000, guid: cd59d13db60b303489399114b409d6f1, type: 2}
+  wallDiagonalCornerUpRight: {fileID: 11400000, guid: 87238c4a9353b66419269ec3f1740f30, type: 2}
+  wallDiagonalCornerUpLeft: {fileID: 11400000, guid: 4513a50934513244e8b1b5c2a28817f1, type: 2}
 --- !u!156049354 &171673198
 Grid:
   m_ObjectHideFlags: 0
@@ -402,7 +402,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.14901961, g: 0.078431375, b: 0.105882354, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -419,7 +419,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -459,10 +459,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c95cd85ca920f9940abe651f575b254d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b26094225e774148995e7a3515477dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 1867887365}
+  lookAt: {fileID: 1867887365}
+  boundX: 0.3
+  boundY: 0.15
 --- !u!1 &697511703
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +650,7 @@ GameObject:
   - component: {fileID: 1032339197}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Blocking
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -855,7 +857,7 @@ SpriteRenderer:
   m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &1057588713
@@ -1198,6 +1200,7 @@ GameObject:
   - component: {fileID: 1867887365}
   - component: {fileID: 1867887364}
   - component: {fileID: 1867887366}
+  - component: {fileID: 1867887367}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1243,15 +1246,15 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 672465605
+  m_SortingLayerID: -888470379
   m_SortingLayer: 1
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 64e85bd95d7caac4484ec61e0ef68609, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 256f6fa1b13457243a2eabd2086c8968, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1282,7 +1285,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1867887363}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81393ae33b17ac24aa8fa3190ceec2e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 7202c7bc6dc3d1946a8f571606252e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 10
+  movementSpeed: 4
+--- !u!61 &1867887367
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867887363}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.07023144, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 0.64, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.76343095, y: 1}
+  m_EdgeRadius: 0
