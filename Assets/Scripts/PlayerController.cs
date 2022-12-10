@@ -1,11 +1,11 @@
-using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private BoxCollider2D boxCollider;
     private Vector3 moveDelta;
-    private RaycastHit2D hit;
+    private RaycastHit2D hitX;
+    private RaycastHit2D hitY;
     [SerializeField] private int movementSpeed;
 
     private void Start()
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
+        float timeElapsed = Time.fixedDeltaTime;
 
         moveDelta = new Vector3(x, y, 0);
 
@@ -28,19 +29,26 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
-
-        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y),
-            Math.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-        if (hit.collider == null)
-        {
-            transform.Translate(0, moveDelta.y * Time.deltaTime * movementSpeed, 0);
-        }
         
-        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x, 0),
-            Math.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-        if (hit.collider == null)
-        {
-            transform.Translate(moveDelta.x * Time.deltaTime * movementSpeed, 0, 0);
-        }
+        
+        
+            float movementX = movementSpeed * moveDelta.x * timeElapsed;
+            transform.Translate(movementX, 0, 0);
+            hitX = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y),
+            Mathf.Abs(moveDelta.y * timeElapsed * movementSpeed), LayerMask.GetMask("Entities", "Blocks"));
+            if (hitX.collider is not null)
+            {
+                transform.Translate(-movementX, 0, 0);
+            }
+
+            float movementY = movementSpeed * moveDelta.y * timeElapsed;
+            transform.Translate(0, movementY, 0);
+            hitY = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x, 0),
+            Mathf.Abs(moveDelta.x * timeElapsed * movementSpeed), LayerMask.GetMask("Entities", "Blocks"));
+            if (hitY.collider is not null)
+            {
+                transform.Translate(0, -movementY, 0);
+            }
+        
     }
 }

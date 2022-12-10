@@ -648,9 +648,9 @@ GameObject:
   - component: {fileID: 1032339194}
   - component: {fileID: 1032339195}
   - component: {fileID: 1032339197}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Walls
-  m_TagString: Blocking
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
