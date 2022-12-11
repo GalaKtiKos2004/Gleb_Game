@@ -6,10 +6,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDelta;
     private RaycastHit2D hitX;
     private RaycastHit2D hitY;
+    private Rigidbody2D _rb;
     [SerializeField] private int movementSpeed;
 
     private void Start()
     {
+        _rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
@@ -29,26 +31,10 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
-        
-        
-        
-            float movementX = movementSpeed * moveDelta.x * timeElapsed;
-            transform.Translate(movementX, 0, 0);
-            hitX = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y),
-            Mathf.Abs(moveDelta.y * timeElapsed * movementSpeed), LayerMask.GetMask("Entities", "Blocks"));
-            if (hitX.collider is not null)
-            {
-                transform.Translate(-movementX, 0, 0);
-            }
 
-            float movementY = movementSpeed * moveDelta.y * timeElapsed;
-            transform.Translate(0, movementY, 0);
-            hitY = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x, 0),
-            Mathf.Abs(moveDelta.x * timeElapsed * movementSpeed), LayerMask.GetMask("Entities", "Blocks"));
-            if (hitY.collider is not null)
-            {
-                transform.Translate(0, -movementY, 0);
-            }
-        
+
+        _rb.velocity = new Vector2(moveDelta.x * movementSpeed * timeElapsed,
+            moveDelta.y * movementSpeed * timeElapsed);
+
     }
 }
