@@ -2,26 +2,28 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public class TilemapVisualizer : MonoBehaviour
 {
     [SerializeField]
     private Tilemap floorTilemap, wallTilemap;
     [SerializeField]
-    private TileBase floorTile, wallTop, wallSideRight, wallSiderLeft, wallBottom, wallFull, 
+    private TileBase floorEmptyTile, wallTop, wallSideRight, wallSiderLeft, wallBottom, wallFull, 
         wallInnerCornerDownLeft, wallInnerCornerDownRight, 
         wallDiagonalCornerDownRight, wallDiagonalCornerDownLeft, wallDiagonalCornerUpRight, wallDiagonalCornerUpLeft;
+    [SerializeField] private TileBase[] floorTiles;
 
     public void PlaceFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
-        PaintTiles(floorPositions, floorTilemap, floorTile);
+        PaintTiles(floorPositions, floorTilemap, floorTiles);
     }
 
-    private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
+    private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase[] tiles)
     {
         foreach (var position in positions)
         {
-            PaintSingleTile(tilemap, tile, position);
+            PaintSingleTile(tilemap, tiles, position);
         }
     }
 
@@ -50,13 +52,29 @@ public class TilemapVisualizer : MonoBehaviour
         }
 
         if (tile!=null)
-            PaintSingleTile(wallTilemap, tile, position);
+            PaintSingleWallTile(wallTilemap, tile, position);
     }
 
-    private void PaintSingleTile(Tilemap tilemap, TileBase tile, Vector2Int position)
+
+    private void PaintSingleWallTile(Tilemap tilemap, TileBase tile, Vector2Int position)
     {
         var tilePosition = tilemap.WorldToCell((Vector3Int)position);
         tilemap.SetTile(tilePosition, tile);
+    }
+
+    private void PaintSingleTile(Tilemap tilemap, TileBase[] tiles, Vector2Int position)
+    {
+        if (Random.value < 0.6f)
+        {
+            var tilePosition = tilemap.WorldToCell((Vector3Int)position);
+            int index = Random.Range(0, tiles.Length);
+            tilemap.SetTile(tilePosition, tiles[index]);
+        }
+        else
+        {
+            var tilePosition = tilemap.WorldToCell((Vector3Int)position);
+            tilemap.SetTile(tilePosition, floorEmptyTile);
+        }
     }
 
     public void Clear()
@@ -104,6 +122,6 @@ public class TilemapVisualizer : MonoBehaviour
         }
 
         if (tile != null)
-            PaintSingleTile(wallTilemap, tile, position);
+            PaintSingleWallTile(wallTilemap, tile, position);
     }
 }

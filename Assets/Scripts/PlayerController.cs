@@ -7,10 +7,12 @@ public class PlayerController : MonoBehaviour
     private RaycastHit2D hitX;
     private RaycastHit2D hitY;
     [SerializeField] private int movementSpeed;
+    private SpriteRenderer sprite;
 
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
@@ -23,11 +25,11 @@ public class PlayerController : MonoBehaviour
 
         if (moveDelta.x > 0)
         {
-            transform.localScale = Vector3.one;
+            sprite.flipX = false;
         }
         else if (moveDelta.x < 0)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            sprite.flipX = true;
         }
 
 

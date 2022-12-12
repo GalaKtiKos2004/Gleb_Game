@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorTilemap: {fileID: 697511704}
   wallTilemap: {fileID: 1032339194}
-  floorTile: {fileID: 11400000, guid: 3b763e36724083f469518fcdbe95320f, type: 2}
+  floorEmptyTile: {fileID: 11400000, guid: 48fae3a6bf490d14b882e34e4cb089f5, type: 2}
   wallTop: {fileID: 11400000, guid: c4b8419097d98234281586197586a9e7, type: 2}
   wallSideRight: {fileID: 11400000, guid: b50cae579121e1549b04bd0c2fb1a442, type: 2}
   wallSiderLeft: {fileID: 11400000, guid: e112736955350364c834092834bfd9bc, type: 2}
@@ -167,6 +167,19 @@ MonoBehaviour:
   wallDiagonalCornerDownLeft: {fileID: 11400000, guid: cd59d13db60b303489399114b409d6f1, type: 2}
   wallDiagonalCornerUpRight: {fileID: 11400000, guid: 87238c4a9353b66419269ec3f1740f30, type: 2}
   wallDiagonalCornerUpLeft: {fileID: 11400000, guid: 4513a50934513244e8b1b5c2a28817f1, type: 2}
+  floorTiles:
+  - {fileID: 11400000, guid: e14af0bb99e98004fbf54fed2021f481, type: 2}
+  - {fileID: 11400000, guid: ad2b8684cc7121e42b5be05418abc7e7, type: 2}
+  - {fileID: 11400000, guid: 75310692dfa62584a8162ed49d34cda4, type: 2}
+  - {fileID: 11400000, guid: 748043eecec8ed844a8e0a8b088a1edc, type: 2}
+  - {fileID: 11400000, guid: 824c0016b6648814a9dc5c877c71a9ff, type: 2}
+  - {fileID: 11400000, guid: 577323ad0d9fafe43b83ec93c910de51, type: 2}
+  - {fileID: 11400000, guid: 7af322ffafc12ca479af1d3efc5aede2, type: 2}
+  - {fileID: 11400000, guid: 4a02ec9c22fdf7940a438e8fd6a64c05, type: 2}
+  - {fileID: 11400000, guid: 9c848ba1791f6d542bfcd4c0f4d53920, type: 2}
+  - {fileID: 11400000, guid: e70288767b92f7d45ada7513afc5b28b, type: 2}
+  - {fileID: 11400000, guid: a6656160fd13d3b419b857ccd0162a17, type: 2}
+  - {fileID: 11400000, guid: 1d660d2bf36367a42833b6e4f36f4c26, type: 2}
 --- !u!156049354 &171673198
 Grid:
   m_ObjectHideFlags: 0
@@ -402,7 +415,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.14901961, g: 0.078431375, b: 0.105882354, a: 0}
+  m_BackGroundColor: {r: 0.14509805, g: 0.07450981, b: 0.101960786, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -419,7 +432,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -834,7 +847,7 @@ GameObject:
   - component: {fileID: 1057588716}
   - component: {fileID: 1057588713}
   m_Layer: 0
-  m_Name: "\u043A\u0430\u0440\u0430\u043D\u0434\u0430\u0448"
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -917,7 +930,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.0004711151}
@@ -1316,7 +1329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867887363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.513, y: 1.611, z: 0}
+  m_LocalPosition: {x: 15.1, y: 4.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
