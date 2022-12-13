@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -9,6 +10,7 @@ public class Weapon : MonoBehaviour
     protected float _previousAttack;
     protected bool _isAttacking = false;
     protected float _attackStartTime;
+    protected float angle;
 
     void Start()
     {
@@ -16,20 +18,22 @@ public class Weapon : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void FixedUpdate()
     {
-
         CheckAttack();
         Vector2 playerPosition = sceneCamera.WorldToViewportPoint(transform.parent.position);
         Vector2 mousePosition = sceneCamera.ScreenToViewportPoint(Input.mousePosition);
-        float angle = AngleBetweenTwoPoints(playerPosition, mousePosition);
+        angle = AngleBetweenTwoPoints(playerPosition, mousePosition);
         angle = -(180 - angle);
-        transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-        transform.position = transform.parent.position;
-        transform.position += GetMovement(angle) * 0.5f;
         if (_isAttacking)
         {
-            Attack();
+            AttackAnimate();
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+            transform.position = transform.parent.position;
+            transform.position += GetMovement(angle) * 0.5f;
         }
     }
 
@@ -38,21 +42,21 @@ public class Weapon : MonoBehaviour
         return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
 
-    private Vector3 GetMovement(float angle)
+    protected Vector3 GetMovement(float angle)
     {
         float xMovement = Mathf.Cos(Mathf.Deg2Rad * angle);
         float yMovement = Mathf.Sin(Mathf.Deg2Rad * angle);
         return new Vector3(xMovement, yMovement, 0);
     }
 
-    protected virtual void Attack()
+    protected virtual void AttackAnimate()
     {
-        Debug.Log("Not overrided attack");
+        
     }
 
     protected virtual void CheckAttack()
     {
-        Debug.Log("Not overrided CheckAttack");
+        
     }
 
 }
